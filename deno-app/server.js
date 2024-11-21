@@ -1,7 +1,7 @@
 import * as router from "./router.js"
 
 const handler = (req) => {
-    return router.GetResponse(req.url)
+    return router.GetResponse(req)
   }
   
   

@@ -1,4 +1,4 @@
-
+import * as renderer from "./renderer.js"
 
 
 const ParsePathFromURL = (url) => {
@@ -11,23 +11,76 @@ const ParsePathFromURL = (url) => {
         return "/error";
     }
 
-    return "/" + matching[5];
+    const indexOfLastMatchingChar = matching.index + matching[0].length -1
+
+    return url.slice(indexOfLastMatchingChar);
+}
+
+const TryToSaveCredentials = (request) => {
+    return true
 }
 
 
-export const GetResponse = (url) => {
+export const GetResponseToGet = (request) => {
 
-    url = ParsePathFromURL(url)
+    let url = ParsePathFromURL(request.url)
+    
     switch (url){
         case "/":
-            return new Response("Homepage")
+            return new Response(renderer.GetHomePageHTML(), {
+                headers: {"Content-Type": "text/html"},
+            })
             
         case "/register":
-            return new Response("Registration page")
+            return new Response(renderer.GetRegisterPageHTML(), {
+                headers: {"Content-Type": "text/html"},
+            })
 
         default:
             return new Response("Unknown url")
         
+    }
+}
+
+export const HandleUserCredentials = (request) => {
+
+    if (TryToSaveCredentials(request)){
+
+        return new Response(renderer.GetSuccesfullRegisterPageHTML(), {
+            headers: {"Content-Type": "text/html"},
+        })
+    }
+    else{
+        return new Response(renderer.GetUnsuccesfullRegisterPageHTML(), {
+            headers: {"Content-Type": "text/html"},
+        })
+    }
+}
+
+export const GetResponseToPost = (request) => {
+
+    let url = ParsePathFromURL(request.url)
+
+    switch (url){
+        case "/register":
+            return HandleUserCredentials()
+        
+
+        default:
+            return new Response("Unknown url")
+    }
+}
+
+export const GetResponse = (request) => {
+
+    
+
+    if (request.method == "POST"){
+        return GetResponseToPost(request)
+    }
+
+    if (request.method == "GET"){
+        return GetResponseToGet(request)
     }
 }
 
