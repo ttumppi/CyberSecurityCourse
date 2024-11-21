@@ -1,0 +1,31 @@
+name: booking_system
+
+services:
+  postgresql_db:
+    image: postgres
+    container_name: postgresql_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+      POSTGRES_DB: booking_system_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+    - "5432:5432"
+
+
+  deno:
+    image: denoland/deno:2.0.6
+    container_name: booking_system_website
+    volumes:
+      - ./deno-app:/app
+    working_dir: /app
+    command: ["run", "--inspect=0.0.0.0:8001", "--allow-net", "server.js"]
+    depends_on: 
+      - postgresql_db
+    ports:
+    - "8001:8001"
+    - "8000:8000"
+
+volumes:
+  db_data:

@@ -1,0 +1,15 @@
+{
+    "name": "Deno + PostgreSQL Dev Container",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "deno", // The service you want to work with
+    "workspaceFolder": "/app", // Path inside the container
+    "extensions": ["denoland.vscode-deno"], // Install the Deno extension
+    "settings": {
+      "deno.enable": true,
+      "deno.lint": true,
+      "deno.unstable": true
+    },
+    "postCreateCommand": "deno cache server.ts", // Optional: pre-cache your app
+    "forwardPorts": [8001, 5432], // Forward the app and DB ports
+    "remoteUser": "node" // Optional: set the default user
+  }
