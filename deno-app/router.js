@@ -1,4 +1,7 @@
-import * as renderer from "./renderer.js"
+
+
+import * as homepageHandler from "./PageControllers/homepageHandler.js"
+import * as registerpageHandler from "./PageControllers/registerpageHandler.js"
 
 
 const ParsePathFromURL = (url) => {
@@ -16,25 +19,19 @@ const ParsePathFromURL = (url) => {
     return url.slice(indexOfLastMatchingChar);
 }
 
-const TryToSaveCredentials = (request) => {
-    return true
-}
 
 
-export const GetResponseToGet = (request) => {
+
+export const GetResponseToGet = async (request) => {
 
     let url = ParsePathFromURL(request.url)
     
     switch (url){
         case "/":
-            return new Response(renderer.GetHomePageHTML(), {
-                headers: {"Content-Type": "text/html"},
-            })
+            return homepageHandler.GetHomePage()
             
         case "/register":
-            return new Response(renderer.GetRegisterPageHTML(), {
-                headers: {"Content-Type": "text/html"},
-            })
+           return registerpageHandler.GetRegisterPage()
 
         default:
             return new Response("Unknown url")
@@ -42,41 +39,27 @@ export const GetResponseToGet = (request) => {
     }
 }
 
-export const HandleUserCredentials = (request) => {
 
-    if (TryToSaveCredentials(request)){
 
-        return new Response(renderer.GetSuccesfullRegisterPageHTML(), {
-            headers: {"Content-Type": "text/html"},
-        })
-    }
-    else{
-        return new Response(renderer.GetUnsuccesfullRegisterPageHTML(), {
-            headers: {"Content-Type": "text/html"},
-        })
-    }
-}
-
-export const GetResponseToPost = (request) => {
+export const GetResponseToPost = async (request) => {
 
     let url = ParsePathFromURL(request.url)
 
     switch (url){
         case "/register":
-            return HandleUserCredentials()
-        
+            return await registerpageHandler.HandleUserCredentials(request)
 
         default:
             return new Response("Unknown url")
     }
 }
 
-export const GetResponse = (request) => {
+export const GetResponse = async (request) => {
 
     
 
     if (request.method == "POST"){
-        return GetResponseToPost(request)
+        return await GetResponseToPost(request)
     }
 
     if (request.method == "GET"){

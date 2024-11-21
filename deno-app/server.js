@@ -1,7 +1,7 @@
 import * as router from "./router.js"
 
-const handler = (req) => {
-    return router.GetResponse(req)
+const handler = async (req) => {
+    return await router.GetResponse(req)
   }
   
   
