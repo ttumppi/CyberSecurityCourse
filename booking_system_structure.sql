@@ -1,7 +1,7 @@
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     username varchar(255) UNIQUE,
-    birthdate DATE,
+    birth_date DATE
 );
 
 CREATE TABLE passwords(
@@ -13,7 +13,7 @@ CREATE TABLE passwords(
 
 CREATE TABLE defined_roles(
     role_id SERIAL PRIMARY KEY,
-    role_name varchar(255) UNIQUE,
+    role_name varchar(255) UNIQUE
 );
 
 CREATE TABLE roles_of_users(
@@ -24,5 +24,5 @@ CREATE TABLE roles_of_users(
 
 INSERT INTO defined_roles (role_name) VALUES
 
-("admin"),
-("reserver");
+('admin'),
+('reserver');

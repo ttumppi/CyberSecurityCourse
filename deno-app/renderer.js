@@ -32,9 +32,20 @@ export const GetRegisterPageHTML = () => {
 
         <form action="/register" method="post"> 
             <label for="username">username:</label><br>
-            <input type="text" id="username" name="username"><br>
+            <input type="text" id="username" name="username" required><br>
+            
             <label for="password">password:</label><br>
-            <input type="text" id="password" name="password"><br>
+            <input type="text" id="password" name="password" required><br>
+
+            <label for="date">Date of birth:</label><br>
+            <input type="date" id="birthDate" name="birthDate" required><br>
+
+            <label for="role">Role:</label><br>
+            <select id="role" name="role">
+                <option value="admin">Administrator</option>
+                <option value="reserver">Reserver</option>
+            </select><br>
+
             <input  type="submit" value="Register">
         </form>
         </body>
