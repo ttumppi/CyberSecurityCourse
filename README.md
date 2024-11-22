@@ -1,6 +1,20 @@
 # CyberSecurityCourse
 Cyber security course git repo
 
+# Configuration
+Clone the repository and cd into the root of the cloned repository on your machine.
+
+Run **docker compose up --build**
+
+
+This should build and straight up run the db and website.
+
+
+Use **docker compose down** to shut down the containers.
+
+
+Website is available at **localhost:8000**
+
 # Logbook
 
 | Date | Used hours | Subject(s) | output |
@@ -12,3 +26,4 @@ Cyber security course git repo
 |12.11.2024 | 4  | PortSwigger SQL injection course | Learned about Blind SQL injection and did the corresponding labs, authentication and unprotected admin functionality |
 |20.11.2024 | 6  | Setting up docker with postgresql and deno | Functioning docker container with postgresql |
 |21.11.2024 | 8  | Setting up docker with postgresql and deno | Deno works inside docker container and updates db |
+|22.11.2024 | 1  | First  report about site vulnerability     | https://github.com/ttumppi/CyberSecurityCourse/blob/main/Reports/RegisterPageFirstReport.md |
