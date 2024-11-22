@@ -8,7 +8,11 @@ import { cryptoRandomString } from "https://deno.land/x/crypto_random_string@1.0
 
 export const GetRegisterPage = () => {
     return new Response(renderer.GetRegisterPageHTML(), {
-        headers: {"Content-Type": "text/html"},
+        headers: {"Content-Type": "text/html",
+            "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';",
+            "X-Frame-Options": "DENY",
+            "X-Content-Type-Options": "nosniff"
+        },
     })
 }
 
@@ -130,12 +134,20 @@ export const HandleUserCredentials = async (request) => {
     if (credentialsSaveResult.result){
 
         return new Response(renderer.GetSuccesfullRegisterPageHTML(), {
-            headers: {"Content-Type": "text/html"},
+            headers: {"Content-Type": "text/html",
+                "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';",
+                "X-Frame-Options": "DENY",
+                "X-Content-Type-Options": "nosniff"
+            },
         })
     }
     else{
         return new Response(renderer.GetUnsuccesfullRegisterPageHTML(credentialsSaveResult.error), {
-            headers: {"Content-Type": "text/html"},
+            headers: {"Content-Type": "text/html",
+            "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';",
+            "X-Frame-Options": "DENY",
+            "X-Content-Type-Options": "nosniff"
+            },
         })
     }
 }
