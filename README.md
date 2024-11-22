@@ -11,4 +11,4 @@ Cyber security course git repo
 |11.11.2024 | 7  | PortSwigger SQL injection course | did few labs on injecting sql and taking into account column datatype |
 |12.11.2024 | 4  | PortSwigger SQL injection course | Learned about Blind SQL injection and did the corresponding labs, authentication and unprotected admin functionality |
 |20.11.2024 | 6  | Setting up docker with postgresql and deno | Functioning docker container with postgresql |
-|21.11.2024 | 8  | Setting up docker with postgresql and deno | Deno works inside docker container with hello world |
+|21.11.2024 | 8  | Setting up docker with postgresql and deno | Deno works inside docker container and updates db |
