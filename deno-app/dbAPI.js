@@ -11,6 +11,9 @@ const client = new Client({
 
 await client.connect();
 
+// const result = await client.queryObject("SELECT * FROM users")
+// console.log(result.rows)
+
 export const QueryDataBase = async (query, params) => {
 
     try{
