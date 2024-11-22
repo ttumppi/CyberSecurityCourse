@@ -60,7 +60,7 @@ export const GetSuccesfullRegisterPageHTML = () => {
     `
 }
 
-export const GetUnsuccesfullRegisterPageHTML = () => {
+export const GetUnsuccesfullRegisterPageHTML = (error) => {
     return `
     <html> 
         <head>
@@ -71,7 +71,7 @@ export const GetUnsuccesfullRegisterPageHTML = () => {
 
         <body>
         <h1> Register failed! </h1>
-
+        <h2> Error : ${error}   </h2>
         <a href="/">Homepage </a>
         </body>
     </html>
