@@ -1,6 +1,20 @@
 # CyberSecurityCourse
 Cyber security course git repo
 
+# Configuration
+Clone the repository and cd into the root of the cloned repository on your machine.
+
+Run **docker compose up --build**
+
+
+This should build and straight up run the db and website.
+
+
+Use **docker compose down** to shut down the containers.
+
+
+Website is available at **localhost:8000**
+
 # Logbook
 
 | Date | Used hours | Subject(s) | output |
