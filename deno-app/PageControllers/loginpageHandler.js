@@ -2,6 +2,7 @@ import * as renderer from "../renderer.js"
 import * as dbHandler from "../db/dbHandler.js"
 import {InfoBooleanResult} from "../Classes/InfoBooleanResult.js"
 import * as headers from "../headers.js"
+import * as tokenGranter from "../tokenGranter.js"
 
 
 export const GetLoginPage = () => {
@@ -23,7 +24,13 @@ export const GetLoginResponse = async (request) => {
         return new Response(renderer.GetUnsuccesfullLoginPageHTML("Invalid credentials"), headers.GetDefaultHeaders())
     }
 
-    
+    return await GetSuccesfullLoginResponse()
+}
+
+const GetSuccessfullLoginResponse = async (username) => {
+    const token = await tokenGranter.CreateToken(username, (60*60))
+
+    return new Response(renderer.GetHomePageHTML(), headers.GetDefaultHeadersWithToken(token))
 }
 
 const PasswordsMatch = async (username, password) {
