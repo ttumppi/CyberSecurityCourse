@@ -90,6 +90,24 @@ export const GetUnsuccesfullRegisterPageHTML = (error) => {
     `
 }
 
+export const GetUnsuccesfullLoginPageHTML = (error) => {
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+        </head>
+
+        <body>
+        <h1> Login failed! </h1>
+        <h2> Error : ${error}   </h2>
+        <a href="/">Homepage </a>
+        </body>
+    </html>
+    `
+}
+
 export const GetLoginPageHTML = () => {
     return `
     <html> 
