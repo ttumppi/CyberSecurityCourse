@@ -27,3 +27,5 @@ Website is available at **localhost:8000**
 |20.11.2024 | 6  | Setting up docker with postgresql and deno | Functioning docker container with postgresql |
 |21.11.2024 | 8  | Setting up docker with postgresql and deno | Deno works inside docker container and updates db |
 |22.11.2024 | 1  | First  report about site vulnerability     | https://github.com/ttumppi/CyberSecurityCourse/blob/main/Reports/RegisterPageFirstReport.md |
+|22.11.2024 | 7  | Changed registration to include birthdate and role, added hashing to password | Redesigned database and more secure password saving, website more scalable for future development |
+|22.11.2024 | 0.5 |Final report with fewer risks regarding the site | https://github.com/ttumppi/CyberSecurityCourse/blob/main/Reports/FinalReportForRegistrationPage.md|
