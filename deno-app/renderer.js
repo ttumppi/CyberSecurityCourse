@@ -13,6 +13,7 @@ export const GetHomePageHTML = () => {
         <h1> Welcome to the homepage! </h1>
 
         <a href="/register">Register </a>
+        <a href="/login">Login </a>
         </body>
     </html>
     `
@@ -87,4 +88,29 @@ export const GetUnsuccesfullRegisterPageHTML = (error) => {
         </body>
     </html>
     `
+}
+
+export const GetLoginPageHTML = () => {
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+        </head>
+
+        <body>
+        <h1> Login page! </h1>
+
+        <form action="/login" method="post"> 
+            <label for="username">username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+            
+            <label for="password">password:</label><br>
+            <input type="text" id="password" name="password" required><br>
+
+            <input  type="submit" value="Login">
+        </form>
+        </body>
+    </html>`
 }

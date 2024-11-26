@@ -2,6 +2,7 @@
 
 import * as homepageHandler from "./PageControllers/homepageHandler.js"
 import * as registerpageHandler from "./PageControllers/registerpageHandler.js"
+import * as loginpageHandler from "./PageControllers/loginpageHandler.js"
 
 
 const ParsePathFromURL = (url) => {
@@ -32,6 +33,9 @@ export const GetResponseToGet = async (request) => {
             
         case "/register":
            return registerpageHandler.GetRegisterPage()
+
+        case "/login":
+            return loginpageHandler.GetLoginPage()
 
         default:
             return new Response("Unknown url")
