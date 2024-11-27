@@ -99,3 +99,21 @@ export const SameHash = async (plainTextPassword, hashedPassword) => {
     return await compare(plainTextPassword, hashedPassword)
 }
 
+export const AddUserLoginLog = async (username, ipAddress) => {
+
+    query = "INSERT INTO login_history (username, ip_address, login_date) VALUES ($1, $2, current_date)"
+
+    const results = await db.QueryDataBase(query, [username, ipAddress])
+
+    return results[0]
+}
+
+export const AddUserLogViewOccurence = async (username, viewedContent) => {
+
+    query = "INSERT INTO log_view_history (username, view_date, viewed_content) VALUES ($1, current_date, $2)"
+
+    const results = await db.QueryDataBase(query, [username, viewed_content])
+
+    return results[0]
+}
+

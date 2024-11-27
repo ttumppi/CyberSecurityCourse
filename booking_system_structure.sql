@@ -22,6 +22,20 @@ CREATE TABLE roles_of_users(
     PRIMARY KEY (user_id, role_id)
 );
 
+CREATE TABLE login_history(
+    id SERIAL PRIMARY KEY,
+    username varchar(255) REFERENCES users(username),
+    ip_address varchar(255),
+    login_date DATE
+)
+
+CREATE TABLE logviewing_history(
+    id SERIAL PRIMARY KEY,
+    username varchar(255),
+    view_date DATE,
+    viewed_content varchar(255)
+)
+
 INSERT INTO defined_roles (role_name) VALUES
 
 ('admin'),
