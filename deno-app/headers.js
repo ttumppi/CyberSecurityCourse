@@ -15,7 +15,21 @@ export const GetDefaultHeadersWithToken = (token) => {
             "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';",
             "X-Frame-Options": "DENY",
             "X-Content-Type-Options": "nosniff",
-            "Authorization": `Bearer ${token}`
+            "Set-Cookie": `Authorization=Bearer ${token}`
         }}
         
 }
+
+export const GetDefaultHeadersWithTokenAndRedirect = (token, url) => {
+    return {
+        status: 302, 
+        headers: {"Content-Type": "text/html",
+            "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';",
+            "X-Frame-Options": "DENY",
+            "X-Content-Type-Options": "nosniff",
+            "Set-Cookie": `Authorization=Bearer ${token}`,
+            "Location": `${url}`
+        }
+    }
+}
+

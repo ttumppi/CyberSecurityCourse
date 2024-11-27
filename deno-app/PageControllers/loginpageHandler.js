@@ -30,7 +30,7 @@ export const GetLoginResponse = async (request) => {
 const GetSuccessfullLoginResponse = async (username) => {
     const token = await tokenGranter.CreateToken(username, (60*60))
 
-    return new Response(renderer.GetHomePageHTML(), headers.GetDefaultHeadersWithToken(token))
+    return new Response(null, headers.GetDefaultHeadersWithTokenAndRedirect(token, "/"))
 }
 
 const PasswordsMatch = async (username, password) => {

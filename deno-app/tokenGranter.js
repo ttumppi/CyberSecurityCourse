@@ -24,5 +24,5 @@ export const VerifyToken = async (token) => {
         return {success: false, message: error}
     }
 
-    return true
+    
 }
