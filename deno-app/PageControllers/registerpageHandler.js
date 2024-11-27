@@ -37,9 +37,7 @@ const InsertUserData = async (data) => {
     const roleID = await dbHandler.GetRoleID(role)
     const roleOfUserInsertResult = await dbHandler.InsertRoleOfUserToDB(userID, roleID)
 
-    console.log(`user insert result: ${usersInsertResult}`)
-    console.log(`password insert result: ${passwordInsertResult}`)
-    console.log(`role insert result: ${roleOfUserInsertResult}`)
+   
 
     const success = usersInsertResult & passwordInsertResult & roleOfUserInsertResult
 
