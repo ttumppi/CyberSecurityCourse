@@ -3,6 +3,7 @@
 import * as homepageHandler from "./PageControllers/homepageHandler.js"
 import * as registerpageHandler from "./PageControllers/registerpageHandler.js"
 import * as loginpageHandler from "./PageControllers/loginpageHandler.js"
+import * as styleHandler from "./Styling/styleHandler.js"
 
 
 const ParsePathFromURL = (url) => {
@@ -36,6 +37,9 @@ export const GetResponseToGet = async (request) => {
 
         case "/login":
             return loginpageHandler.GetLoginPage()
+
+        case "/styles":
+            return await styleHandler.GetStyleResponse(request)
 
         default:
             return new Response("Unknown url")

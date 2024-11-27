@@ -7,13 +7,16 @@ export const GetHomePageHTML = () => {
             <title> 
             Booking system 
             </title>
+            <link rel="stylesheet" href="/styles">
         </head>
 
         <body>
         <h1> Welcome to the homepage! </h1>
-
-        <a href="/register">Register </a>
-        <a href="/login">Login </a>
+        
+        <div class="right-align">
+            <a href="/register">Register </a>
+            <a href="/login">Login </a>
+        </div>
         </body>
     </html>
     `
@@ -26,13 +29,16 @@ export const GetHomePageWithUsernameHTML = (username) => {
             <title> 
             Booking system 
             </title>
+            <link rel="stylesheet" href="/styles">
         </head>
 
         <body>
         <h1> Welcome to the homepage! </h1>
 
-        <a href="/logout">Logout </a>
-        <p> Logged in as : ${username} </p>
+        <div class="right-align">
+            <p> Logged in as : ${username} </p>
+            <a href="/logout">Logout </a>
+        </div>
         </body>
     </html>
     `
@@ -45,9 +51,13 @@ export const GetRegisterPageHTML = () => {
             <title> 
             Booking system 
             </title>
+            <link rel="stylesheet" href="/styles">
         </head>
 
         <body>
+        <div class="right-align">
+            <a href="/">Homepage </a>
+        </div>
         <h1> Register page! </h1>
 
         <form action="/register" method="post"> 
@@ -80,6 +90,7 @@ export const GetSuccesfullRegisterPageHTML = () => {
             <title> 
             Booking system 
             </title>
+            <link rel="stylesheet" href="/styles">
         </head>
 
         <body>
@@ -98,6 +109,7 @@ export const GetUnsuccesfullRegisterPageHTML = (error) => {
             <title> 
             Booking system 
             </title>
+            <link rel="stylesheet" href="/styles">
         </head>
 
         <body>
@@ -116,6 +128,7 @@ export const GetUnsuccesfullLoginPageHTML = (error) => {
             <title> 
             Booking system 
             </title>
+            <link rel="stylesheet" href="/styles">
         </head>
 
         <body>
@@ -134,9 +147,15 @@ export const GetLoginPageHTML = () => {
             <title> 
             Booking system 
             </title>
+            <link rel="stylesheet" href="/styles">
         </head>
 
         <body>
+
+        <div class="right-align">
+            <a href="/">Homepage </a>
+        </div>
+
         <h1> Login page! </h1>
 
         <form action="/login" method="post"> 
