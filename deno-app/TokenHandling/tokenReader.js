@@ -1,6 +1,6 @@
 import * as tokenGranter from "./tokenGranter.js"
 
-export const VerifyToken = async (headers) => {
+export const VerifyAndGetToken = async (headers) => {
     const cookie = headers.get("Cookie")
 
     if (!cookie){
@@ -13,7 +13,7 @@ export const VerifyToken = async (headers) => {
         return {success:false}
     }
 
-    return tokenGranter.VerifyToken(token)
+    return tokenGranter.VerifyAndGetToken(token)
 
 }
 

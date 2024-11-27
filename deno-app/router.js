@@ -3,6 +3,7 @@
 import * as homepageHandler from "./PageControllers/homepageHandler.js"
 import * as registerpageHandler from "./PageControllers/registerpageHandler.js"
 import * as loginpageHandler from "./PageControllers/loginpageHandler.js"
+import * as pagelessHandler from "./PageControllers/pagelessHandler.js"
 import * as styleHandler from "./Styling/styleHandler.js"
 
 
@@ -37,6 +38,9 @@ export const GetResponseToGet = async (request) => {
 
         case "/login":
             return loginpageHandler.GetLoginPage()
+
+        case "/logout":
+            return await pagelessHandler.GetResponseToLogout(request)
 
         case "/styles":
             return await styleHandler.GetStyleResponse(request)

@@ -2,7 +2,7 @@ import * as renderer from "../renderer.js"
 import * as dbHandler from "../db/dbHandler.js"
 import {InfoBooleanResult} from "../Classes/InfoBooleanResult.js"
 import * as headers from "../headers.js"
-import * as tokenGranter from "../tokenGranter.js"
+import * as tokenSystem from "../TokenHandling/tokenSystem.js"
 
 
 export const GetLoginPage = () => {
@@ -28,7 +28,7 @@ export const GetLoginResponse = async (request) => {
 }
 
 const GetSuccessfullLoginResponse = async (username) => {
-    const token = await tokenGranter.CreateToken(username, (60*60))
+    const token = await tokenSystem.CreateToken(username, (60*60))
 
     return new Response(null, headers.GetDefaultHeadersWithTokenAndRedirect(token, "/"))
 }

@@ -4,7 +4,9 @@ const secretKey = await crypto.subtle.generateKey(
     { name: "HMAC", hash: "SHA-512" },
     true,
     ["sign", "verify"],
-  );
+  )
+
+
 
 export const CreateToken = async (username, expiration) => {
 
@@ -14,15 +16,15 @@ export const CreateToken = async (username, expiration) => {
           secretKey);
 }
 
-export const VerifyToken = async (token) => {
+export const VerifyAndGetToken = async (token) => {
 
     try{
         const decodedToken = await verify(token, secretKey)
         return {success: true, token: decodedToken}
     }
+
     catch(error){
         return {success: false, message: error}
     }
-
     
 }
