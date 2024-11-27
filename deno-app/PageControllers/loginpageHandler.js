@@ -24,7 +24,7 @@ export const GetLoginResponse = async (request) => {
         return new Response(renderer.GetUnsuccesfullLoginPageHTML("Invalid credentials"), headers.GetDefaultHeaders())
     }
 
-    return await GetSuccesfullLoginResponse()
+    return await GetSuccessfullLoginResponse(username)
 }
 
 const GetSuccessfullLoginResponse = async (username) => {
@@ -33,11 +33,13 @@ const GetSuccessfullLoginResponse = async (username) => {
     return new Response(renderer.GetHomePageHTML(), headers.GetDefaultHeadersWithToken(token))
 }
 
-const PasswordsMatch = async (username, password) {
+const PasswordsMatch = async (username, password) => {
     const userID = await dbHandler.GetUserID(username)
     const savedPassword = await dbHandler.GetPasswordForUser(userID)
 
-    hashedPassword = await dbHandler.HashPasswordWithSavedSalt(userID, password)
+    const salt = await dbHandler.GetStoredSalt(userID)
 
-    return hashedPassword == savedPassword
+
+
+    return await dbHandler.SameHash((password + salt) ,savedPassword)
 }

@@ -1,12 +1,22 @@
 import * as renderer from "../renderer.js"
+import * as headers from "../headers.js"
+import * as tokenGranter from "../tokenGranter.js"
 
+export const GetHomePage = async (request) => {
 
-export const GetHomePage = () => {
-    return new Response(renderer.GetHomePageHTML(), {
-        headers: {"Content-Type": "text/html",
-            "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';",
-            "X-Frame-Options": "DENY",
-            "X-Content-Type-Options": "nosniff"
-        },
-    })
+    const requestHeaders = request.headers
+    const authorization = requestHeaders.get("Authorization")
+
+    if (!authorization){
+        return new Response(renderer.GetHomePageHTML(), headers.GetDefaultHeaders())
+    }
+
+    const verifyResult = await tokenGranter.verify(authorization)
+
+    if (!verifyResult.success){
+        return new Response(renderer.GetUnsuccesfullLoginPageHTML(verifyResult.message), headers.GetDefaultHeaders())
+    }
+
+    return new Response(renderer.GetHomePageWithUsernameHTML(verifyResult.token.username), headers.GetDefaultHeaders())
 }
+

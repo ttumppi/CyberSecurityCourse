@@ -29,7 +29,7 @@ export const GetResponseToGet = async (request) => {
     
     switch (url){
         case "/":
-            return homepageHandler.GetHomePage()
+            return await homepageHandler.GetHomePage(request)
             
         case "/register":
            return registerpageHandler.GetRegisterPage()
@@ -52,6 +52,9 @@ export const GetResponseToPost = async (request) => {
     switch (url){
         case "/register":
             return await registerpageHandler.HandleUserCredentials(request)
+
+        case "/login":
+            return await loginpageHandler.GetLoginResponse(request)
 
         default:
             return new Response("Unknown url")

@@ -11,17 +11,7 @@ const client = new Client({
 
 await client.connect();
 
-let result = await client.queryObject("SELECT * FROM users")
-console.log(result.rows)
 
-result = await client.queryObject("SELECT * FROM passwords")
-console.log(result.rows)
-
-result = await client.queryObject("SELECT * FROM defined_roles")
-console.log(result.rows)
-
-result = await client.queryObject("SELECT * FROM roles_of_users")
-console.log(result.rows)
 
 
 

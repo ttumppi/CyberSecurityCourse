@@ -1,7 +1,7 @@
 import * as renderer from "../renderer.js"
 import * as dbHandler from "../db/dbHandler.js"
 import {InfoBooleanResult} from "../Classes/InfoBooleanResult.js"
-import * as headers from "../renderer.js"
+import * as headers from "../headers.js"
 
 
 

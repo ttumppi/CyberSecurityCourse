@@ -19,6 +19,25 @@ export const GetHomePageHTML = () => {
     `
 }
 
+export const GetHomePageWithUsernameHTML = (username) => {
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+        </head>
+
+        <body>
+        <h1> Welcome to the homepage! </h1>
+
+        <a href="/logout">Logout </a>
+        <p> Logged in as : ${username} </p>
+        </body>
+    </html>
+    `
+}
+
 export const GetRegisterPageHTML = () => {
     return `
     <html> 
