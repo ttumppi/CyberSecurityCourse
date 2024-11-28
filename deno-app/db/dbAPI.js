@@ -23,7 +23,6 @@ export const QueryDataBase = async (query, params) => {
         return [true, result]
     }
     catch (error){
-        console.log(error)
         return [false, null]
     }
     

@@ -10,6 +10,10 @@ export const ContainsUsername = async (username) =>{
 
     const results = await db.QueryDataBase(query, [username])
 
+    if (!results[0]){
+        return new InfoBooleanResult(true, "failed to identify username")
+    }
+
     if (results[0] & results[1].rows.length > 0){
         return new InfoBooleanResult(true, "username is registered already.")
     }
@@ -40,7 +44,15 @@ export const GetUserID = async (username) => {
     const results = await db.QueryDataBase(query, [username])
 
     if (!results[0]){
-        return null
+        return ""
+    }
+
+    if (results[1].rows.length == 0){
+        return ""
+    }
+
+    if (!results[1].rows[0].id){
+        return ""
     }
 
     return results[1].rows[0].id
@@ -75,6 +87,14 @@ export const GetRoleID = async (role) => {
         return null
     }
 
+    if (results[1].rows.length == 0){
+        return null
+    }
+
+    if (!results[1].rows[0].role_id){
+        return null
+    }
+
     return results[1].rows[0].role_id
 }
 
@@ -85,6 +105,18 @@ export const GetPasswordForUser = async (userID) => {
 
     const results = await db.QueryDataBase(query, [userID])
 
+    if (!results[0]){
+        return ""
+    }
+
+    if (results[1].rows.length == 0){
+        return ""
+    }
+
+    if (!results[1].rows[0].password_hash){
+        return ""
+    }
+
     return results[1].rows[0].password_hash
 }
 
@@ -92,6 +124,18 @@ export const GetStoredSalt = async (userID) => {
     const query = "SELECT salt FROM passwords WHERE user_id = $1"
 
     const results = await db.QueryDataBase(query, [userID])
+
+    if (!results[0]){
+        return ""
+    }
+
+    if (results[1].rows.length == 0){
+        return ""
+    }
+
+    if (!results[1].rows[0].salt){
+        return ""
+    }
 
     return results[1].rows[0].salt
 
