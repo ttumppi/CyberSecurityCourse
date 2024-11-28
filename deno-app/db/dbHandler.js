@@ -101,7 +101,7 @@ export const SameHash = async (plainTextPassword, hashedPassword) => {
 
 export const AddUserLoginLog = async (username, ipAddress, iv) => {
 
-    const dataObject = JSON.stringify({username: username, ipAddress: ipAddress})
+    const dataObject = JSON.stringify({username, ipAddress})
 
     query = "INSERT INTO login_history (data, iv) VALUES ($1, $2)"
 
@@ -112,7 +112,7 @@ export const AddUserLoginLog = async (username, ipAddress, iv) => {
 
 export const AddUserLogViewOccurence = async (username, viewedContent, iv) => {
 
-    const  dataObject = JSON.stringify({username: username, viewedContent: viewedContent})
+    const  dataObject = JSON.stringify({username, viewedContent})
 
     query = "INSERT INTO log_view_history (data, iv) VALUES ($1, $2)"
 
