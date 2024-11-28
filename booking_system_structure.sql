@@ -24,17 +24,13 @@ CREATE TABLE roles_of_users(
 
 CREATE TABLE login_history(
     id SERIAL PRIMARY KEY,
-    username varchar(255) REFERENCES users(username),
-    ip_address varchar(255),
-    login_date DATE,
+    data varchar(255),
     iv varchar(255)
 )
 
 CREATE TABLE logviewing_history(
     id SERIAL PRIMARY KEY,
-    username varchar(255),
-    view_date DATE,
-    viewed_content varchar(255),
+    data varchar(255),
     iv varchar(255)
 )
 

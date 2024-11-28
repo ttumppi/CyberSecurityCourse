@@ -101,18 +101,22 @@ export const SameHash = async (plainTextPassword, hashedPassword) => {
 
 export const AddUserLoginLog = async (username, ipAddress, iv) => {
 
-    query = "INSERT INTO login_history (username, ip_address, login_date, iv) VALUES ($1, $2, current_date, $3)"
+    const dataObject = JSON.stringify({username: username, ipAddress: ipAddress})
 
-    const results = await db.QueryDataBase(query, [username, ipAddress, iv])
+    query = "INSERT INTO login_history (data, iv) VALUES ($1, $2)"
+
+    const results = await db.QueryDataBase(query, [dataObject, iv])
 
     return results[0]
 }
 
 export const AddUserLogViewOccurence = async (username, viewedContent, iv) => {
 
-    query = "INSERT INTO log_view_history (username, view_date, viewed_content, iv) VALUES ($1, current_date, $2, $3)"
+    const  dataObject = JSON.stringify({username: username, viewedContent: viewedContent})
 
-    const results = await db.QueryDataBase(query, [username, viewed_content, iv])
+    query = "INSERT INTO log_view_history (data, iv) VALUES ($1, $2)"
+
+    const results = await db.QueryDataBase(query, [dataObject, iv])
 
     return results[0]
 }
