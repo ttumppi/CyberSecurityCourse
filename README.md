@@ -32,3 +32,4 @@ Website is available at **localhost:8000**
 |26.11.2024 | 4   | Login page creation  | Created barebone login page |
 |27.11.2024 | 10  | Token for session management, login page | Created token system to track session of user and finished login page |
 |28.11.2024 | 3   | Encryption for logging of login information | encryption and decryption of user analytics done |
+|28.11.2024 | 0.1 | Added first report| https://github.com/ttumppi/CyberSecurityCourse/blob/main/Reports/Phase2FirstReport.md |
