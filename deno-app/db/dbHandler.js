@@ -2,6 +2,8 @@ import {hash, compare } from "https://deno.land/x/bcrypt/mod.ts"
 import { cryptoRandomString } from "https://deno.land/x/crypto_random_string@1.0.0/mod.ts"
 import {InfoBooleanResult} from "../Classes/InfoBooleanResult.js"
 import * as db from "./dbAPI.js"
+import * as encryption from "../Cryptography/encryption.js"
+import * as decryption from "../Cryptography/decryption.js"
 
 export const ContainsUsername = async (username) =>{
     const query = "SELECT username FROM users WHERE username = $1"
@@ -99,25 +101,79 @@ export const SameHash = async (plainTextPassword, hashedPassword) => {
     return await compare(plainTextPassword, hashedPassword)
 }
 
-export const AddUserLoginLog = async (username, ipAddress, iv) => {
+export const AddUserLoginLog = async (username, ipAddress) => {
 
     const dataObject = JSON.stringify({username, ipAddress})
 
+    const encryptedDataAndIv = await encryption.EncryptString(dataObject)
+
+
+
     query = "INSERT INTO login_history (data, iv) VALUES ($1, $2)"
 
-    const results = await db.QueryDataBase(query, [dataObject, iv])
+    const results = await db.QueryDataBase(query, [encryptedDataAndIv.data, encryptedDataAndIv.iv])
 
     return results[0]
 }
 
-export const AddUserLogViewOccurence = async (username, viewedContent, iv) => {
+export const GetUserLoginLog = async (username) => {
+
+    const query = "SELECT * FROM login_history"
+
+    const results = await db.QueryDataBase(query, [])
+
+    if (!results[0]){
+        return {success: false}
+    }
+
+    let entries = []
+
+    results[1].rows.forEach((row) => {
+
+        const decryptedData = await decryption.DecryptString(row.data, row.iv)
+
+        entries.push(decryptedData)
+    })
+
+    await AddUserLogViewOccurence(username, "Login history")
+
+    return {success:true, data:entries}
+
+    
+}
+
+export const AddLogViewOccurence = async (username, viewedContent) => {
 
     const  dataObject = JSON.stringify({username, viewedContent})
 
+    const encryptedDataAndIv = await encryption.EncryptString(dataObject)
+
+
+
     query = "INSERT INTO log_view_history (data, iv) VALUES ($1, $2)"
 
-    const results = await db.QueryDataBase(query, [dataObject, iv])
+    const results = await db.QueryDataBase(query, [encryptedDataAndIv.data, encryptedDataAndIv.iv])
 
     return results[0]
+}
+
+export const GetLogViewOccurences = async () => {
+
+    const query = "SELECT * FROM log_view_history"
+
+    const results = await db.QueryDataBase(query, [])
+
+    if (!results[0]){
+        return {success:false}
+    }
+
+    let entries = []
+
+    results[1].rows.forEach((entry) => {
+        const decryptedData = await decryption.DecryptString(entry.data, entry.iv)
+        entries.push(decryptedData)
+    })
+
+    return {success:true, data: entries}
 }
 
