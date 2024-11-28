@@ -29,3 +29,6 @@ Website is available at **localhost:8000**
 |22.11.2024 | 1  | First  report about site vulnerability     | https://github.com/ttumppi/CyberSecurityCourse/blob/main/Reports/RegisterPageFirstReport.md |
 |22.11.2024 | 7  | Changed registration to include birthdate and role, added hashing to password | Redesigned database and more secure password saving, website more scalable for future development |
 |22.11.2024 | 0.5 |Final report with fewer risks regarding the site | https://github.com/ttumppi/CyberSecurityCourse/blob/main/Reports/FinalReportForRegistrationPage.md|
+|26.11.2024 | 4   | Login page creation  | Created barebone login page |
+|27.11.2024 | 10  | Token for session management, login page | Created token system to track session of user and finished login page |
+|28.11.2024 | 3   | Encryption for logging of login information | encryption and decryption of user analytics done |
