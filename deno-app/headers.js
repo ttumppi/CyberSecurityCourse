@@ -15,7 +15,7 @@ export const GetDefaultHeadersWithToken = (token) => {
             "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';",
             "X-Frame-Options": "DENY",
             "X-Content-Type-Options": "nosniff",
-            "Set-Cookie": `Authorization=Bearer ${token}`
+            "Set-Cookie": `Authorization=Bearer ${token}; HttpOnly; SameSite=Lax;`
         }}
         
 }
@@ -27,7 +27,7 @@ export const GetDefaultHeadersWithTokenAndRedirect = (token, url) => {
             "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';",
             "X-Frame-Options": "DENY",
             "X-Content-Type-Options": "nosniff",
-            "Set-Cookie": `Authorization=Bearer ${token}`,
+            "Set-Cookie": `Authorization=Bearer ${token}; HttpOnly; SameSite=Lax;`,
             "Location": `${url}`
         }
     }

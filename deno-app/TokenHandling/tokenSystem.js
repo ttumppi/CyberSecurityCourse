@@ -5,9 +5,13 @@ const unvalidatedTokens = []
 
 export const VerifyAndGetTokenFromHeaders = async (headers) => {
 
-    const result = tokenReader.VerifyAndGetToken(headers)
+    const result = await tokenReader.VerifyAndGetToken(headers)
 
-    if (unvalidatedTokens.indexOf(result.token) != -1){
+    if (!result.success){
+        return {success:false}
+    }
+
+    if (unvalidatedTokens.indexOf(result.token.id) != -1){
         return {success:false}
     }
 
@@ -16,19 +20,19 @@ export const VerifyAndGetTokenFromHeaders = async (headers) => {
 
 export const CreateToken = async (username, expiration) => {
 
-    return tokenGranter.CreateToken(username, expiration)
+    return await tokenGranter.CreateToken(username, expiration)
 }
 
 export const VerifyAndGetToken = async (token) => {
 
-    if (unvalidatedTokens.indexOf(token) != -1){
+    if (unvalidatedTokens.indexOf(token.id) != -1){
         return {success:false, message:"login required"}
     }
 
-    return tokenGranter.VerifyAndGetToken(token)
+    return await tokenGranter.VerifyAndGetToken(token)
 }
 
 export const InvalidateToken = async (token) => {
 
-    unvalidatedTokens.push(token)
+    unvalidatedTokens.push(token.id)
 }

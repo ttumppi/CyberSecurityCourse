@@ -6,13 +6,19 @@ const secretKey = await crypto.subtle.generateKey(
     ["sign", "verify"],
   )
 
+let tokenID = 0
+
 
 
 export const CreateToken = async (username, expiration) => {
 
+    const ID = tokenID
+    tokenID = tokenID + 1
+
     return await create({ alg: "HS512", typ: "JWT" },
          { username: `${username}`,
-        exp: getNumericDate(expiration) },
+        exp: getNumericDate(expiration),
+        id: ID },
           secretKey);
 }
 
