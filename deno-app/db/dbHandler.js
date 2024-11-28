@@ -103,7 +103,9 @@ export const SameHash = async (plainTextPassword, hashedPassword) => {
 
 export const AddUserLoginLog = async (username, ipAddress) => {
 
-    const dataObject = JSON.stringify({username, ipAddress})
+    const currentDate = new Date()
+
+    const dataObject = JSON.stringify({username, ipAddress, currentDate})
 
     const encryptedDataAndIv = await encryption.EncryptString(dataObject)
 
@@ -144,7 +146,9 @@ export const GetUserLoginLog = async (username) => {
 
 export const AddLogViewOccurence = async (username, viewedContent) => {
 
-    const  dataObject = JSON.stringify({username, viewedContent})
+    const currentDate = new Date()
+
+    const  dataObject = JSON.stringify({username, viewedContent, currentDate})
 
     const encryptedDataAndIv = await encryption.EncryptString(dataObject)
 
