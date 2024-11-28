@@ -3,13 +3,14 @@ import * as dbHandler from "../db/dbHandler.js"
 import {InfoBooleanResult} from "../Classes/InfoBooleanResult.js"
 import * as headers from "../headers.js"
 import * as tokenSystem from "../TokenHandling/tokenSystem.js"
+import * as logger from "../Logging/logger.js"
 
 
 export const GetLoginPage = () => {
     return new Response(renderer.GetLoginPageHTML(), headers.GetDefaultHeaders())
 }
 
-export const GetLoginResponse = async (request) => {
+export const GetLoginResponse = async (request, connectionInfo) => {
     const formData = await request.formData()
     const username = formData.get("username")
     const password = formData.get("password")
@@ -24,11 +25,14 @@ export const GetLoginResponse = async (request) => {
         return new Response(renderer.GetUnsuccesfullLoginPageHTML("Invalid credentials"), headers.GetDefaultHeaders())
     }
 
+    logger.LogLogin(username, connectionInfo.remoteAddr.hostname)
+
     return await GetSuccessfullLoginResponse(username)
 }
 
 const GetSuccessfullLoginResponse = async (username) => {
     const token = await tokenSystem.CreateToken(username, (60*60))
+
 
     return new Response(null, headers.GetDefaultHeadersWithTokenAndRedirect(token, "/"))
 }

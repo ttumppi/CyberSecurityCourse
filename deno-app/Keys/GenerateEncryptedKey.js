@@ -4,7 +4,7 @@ import { join } from "https://deno.land/std/path/mod.ts";
 export const GenerateKeyAndSaveToEncryptionKeyFile = async () => {
 
     const contents = await Deno.readTextFile(join(Deno.cwd(), "Keys/encryptionKey.txt"))
-    console.log(contents)
+    
 
     
 

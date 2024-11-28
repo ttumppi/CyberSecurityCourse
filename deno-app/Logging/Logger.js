@@ -1,4 +1,4 @@
-import * as dbHandler from "../db/dbHandler"..
+import * as dbHandler from "../db/dbHandler.js"
 
 
 

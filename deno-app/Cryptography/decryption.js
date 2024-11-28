@@ -1,10 +1,12 @@
 
+import { join } from "https://deno.land/std/path/mod.ts";
+
 
 //-------------------Done on startup
 
 const ReadEncryptionKey = async () => {
 
-    const encryptionKeyAsb64 = Deno.readTextFile(join(Deno.cwd(), "Keys/encryptionKey.txt"))
+    const encryptionKeyAsb64 = await Deno.readTextFile(join(Deno.cwd(), "Keys/encryptionKey.txt"))
 
     const keyAsBytes = Uint8Array.from(atob(encryptionKeyAsb64), c => c.charCodeAt(0)) // turn the whole string to bytes. Includes lambda function that takes each
                                                                                         // char and turns it to a byte, 0 is the index (first char index is 0 and lambda handles only

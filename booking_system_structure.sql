@@ -26,15 +26,16 @@ CREATE TABLE login_history(
     id SERIAL PRIMARY KEY,
     data varchar(255),
     iv varchar(255)
-)
+);
 
 CREATE TABLE logviewing_history(
     id SERIAL PRIMARY KEY,
     data varchar(255),
     iv varchar(255)
-)
+);
 
-INSERT INTO defined_roles (role_name) VALUES
+INSERT INTO defined_roles (role_name)
+VALUES
 
 ('admin'),
 ('reserver');

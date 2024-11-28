@@ -25,7 +25,7 @@ const ParsePathFromURL = (url) => {
 
 
 
-export const GetResponseToGet = async (request) => {
+export const GetResponseToGet = async (request, connectionInfo) => {
 
     let url = ParsePathFromURL(request.url)
     
@@ -53,7 +53,7 @@ export const GetResponseToGet = async (request) => {
 
 
 
-export const GetResponseToPost = async (request) => {
+export const GetResponseToPost = async (request, connectionInfo) => {
 
     let url = ParsePathFromURL(request.url)
 
@@ -62,23 +62,23 @@ export const GetResponseToPost = async (request) => {
             return await registerpageHandler.HandleUserCredentials(request)
 
         case "/login":
-            return await loginpageHandler.GetLoginResponse(request)
+            return await loginpageHandler.GetLoginResponse(request, connectionInfo)
 
         default:
             return new Response("Unknown url")
     }
 }
 
-export const GetResponse = async (request) => {
+export const GetResponse = async (request, connectionInfo) => {
 
     
 
     if (request.method == "POST"){
-        return await GetResponseToPost(request)
+        return await GetResponseToPost(request, connectionInfo)
     }
 
     if (request.method == "GET"){
-        return GetResponseToGet(request)
+        return GetResponseToGet(request, connectionInfo)
     }
 }
 

@@ -103,15 +103,15 @@ export const SameHash = async (plainTextPassword, hashedPassword) => {
 
 export const AddUserLoginLog = async (username, ipAddress) => {
 
-    const currentDate = new Date()
+    const date = new Date()
 
-    const dataObject = JSON.stringify({username, ipAddress, currentDate})
+    const dataObject = JSON.stringify({username, ipAddress, date})
 
     const encryptedDataAndIv = await encryption.EncryptString(dataObject)
 
 
 
-    query = "INSERT INTO login_history (data, iv) VALUES ($1, $2)"
+    const query = "INSERT INTO login_history (data, iv) VALUES ($1, $2)"
 
     const results = await db.QueryDataBase(query, [encryptedDataAndIv.data, encryptedDataAndIv.iv])
 
@@ -130,14 +130,15 @@ export const GetUserLoginLog = async (username) => {
 
     let entries = []
 
-    results[1].rows.forEach((row) => {
-
+    for (const row of results[1].rows){
         const decryptedData = await decryption.DecryptString(row.data, row.iv)
 
         entries.push(decryptedData)
-    })
+    }
 
-    await AddUserLogViewOccurence(username, "Login history")
+    
+
+    await AddLogViewOccurence(username, "Login history")
 
     return {success:true, data:entries}
 
@@ -146,15 +147,15 @@ export const GetUserLoginLog = async (username) => {
 
 export const AddLogViewOccurence = async (username, viewedContent) => {
 
-    const currentDate = new Date()
+    const date = new Date()
 
-    const  dataObject = JSON.stringify({username, viewedContent, currentDate})
+    const  dataObject = JSON.stringify({username, viewedContent, date})
 
     const encryptedDataAndIv = await encryption.EncryptString(dataObject)
 
 
 
-    query = "INSERT INTO log_view_history (data, iv) VALUES ($1, $2)"
+    const query = "INSERT INTO logviewing_history (data, iv) VALUES ($1, $2)"
 
     const results = await db.QueryDataBase(query, [encryptedDataAndIv.data, encryptedDataAndIv.iv])
 
@@ -163,7 +164,7 @@ export const AddLogViewOccurence = async (username, viewedContent) => {
 
 export const GetLogViewOccurences = async () => {
 
-    const query = "SELECT * FROM log_view_history"
+    const query = "SELECT * FROM logviewing_history"
 
     const results = await db.QueryDataBase(query, [])
 
@@ -173,10 +174,13 @@ export const GetLogViewOccurences = async () => {
 
     let entries = []
 
-    results[1].rows.forEach((entry) => {
-        const decryptedData = await decryption.DecryptString(entry.data, entry.iv)
+    for (const row of results[1].rows){
+        const decryptedData = await decryption.DecryptString(row.data, row.iv)
+
         entries.push(decryptedData)
-    })
+    }
+
+   
 
     return {success:true, data: entries}
 }

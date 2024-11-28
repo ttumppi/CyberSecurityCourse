@@ -1,10 +1,11 @@
+import { join } from "https://deno.land/std/path/mod.ts";
 
 
 //-------------------Done on startup
 
 const ReadEncryptionKey = async () => {
 
-    const encryptionKeyAsb64 = Deno.readTextFile(join(Deno.cwd(), "Keys/encryptionKey.txt"))
+    const encryptionKeyAsb64 = await Deno.readTextFile(join(Deno.cwd(), "Keys/encryptionKey.txt"))
 
     const keyAsBytes = Uint8Array.from(atob(encryptionKeyAsb64), c => c.charCodeAt(0)) // turn the whole string to bytes. Includes lambda function that takes each
                                                                                         // char and turns it to a byte, 0 is the index (first char index is 0 and lambda handles only
@@ -37,9 +38,11 @@ const encoder = new TextEncoder()
 
 
 
-const EncryptString = async (stringToEncrypt) => {
+export const EncryptString = async (stringToEncrypt) => {
 
     const iv = crypto.getRandomValues(new Uint8Array(12))
+
+    const stringAsBytes = encoder.encode(stringToEncrypt)
 
     const encryptedData = await crypto.subtle.encrypt(
         {
@@ -47,7 +50,7 @@ const EncryptString = async (stringToEncrypt) => {
             iv: iv,
         },
         encryptedKey,
-        stringToEncrypt,
+        stringAsBytes,
     )
 
     const dataAsBytes = new Uint8Array(encryptedData) 
