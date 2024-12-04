@@ -1,6 +1,7 @@
 import {hash, compare } from "https://deno.land/x/bcrypt/mod.ts"
 import { cryptoRandomString } from "https://deno.land/x/crypto_random_string@1.0.0/mod.ts"
 import {InfoBooleanResult} from "../Classes/InfoBooleanResult.js"
+import {Resource} from "../Classes/Resource.js"
 import * as db from "./dbAPI.js"
 import * as encryption from "../Cryptography/encryption.js"
 import * as decryption from "../Cryptography/decryption.js"
@@ -27,6 +28,42 @@ export const InsertRoleOfUserToDB = async (userID, roleID) => {
     const results = await db.QueryDataBase(query, [userID, roleID])
 
     return results[0]
+}
+
+export const GetRoleOfUser = async (userID) => {
+    const roleIDQuery = "SELECT role_id FROM roles_of_users WHERE user_id = $1"
+
+    const roleIDResults = await db.QueryDataBase(roleIDQuery, [userID])
+
+    if (!roleIDResults[0]){
+        return ""
+    }
+
+    if (roleIDResults[1].rows.length == 0){
+        return ""
+    }
+
+    if (!roleIDResults[1].rows[0].role_id){
+        return ""
+    }
+
+    const roleNameQuery = "SELECT role_name FROM defined_roles WHERE role_id = $1"
+
+    const roleNameResults = await db.QueryDataBase(roleNameQuery, [roleIDResults[1].rows[0].role_id])
+
+    if (!roleNameResults[0]){
+        return ""
+    }
+
+    if (roleNameResults[1].rows.length == 0){
+        return ""
+    }
+
+    if (!roleNameResults[1].rows[0].role_name){
+        return ""
+    }
+    
+    return roleNameResults[1].rows[0].role_name
 }
 
 export const InsertUserTableData = async (username, birthDate) => {
@@ -228,4 +265,135 @@ export const GetLogViewOccurences = async () => {
 
     return {success:true, data: entries}
 }
+
+export const AdminUser = async (username) => {
+
+    const userID = await GetUserID(username)
+
+    if (userID == ""){
+        return false
+    }
+
+    const userRole = await GetRoleOfUser(userID)
+
+    return userRole == "admin"
+
+}
+
+export const ContainsResource = async (resource) => {
+
+    const query = "SELECT * FROM resources WHERE name = $1"
+
+    const results = await dbAPI.QueryDataBase(query, [resource.name])
+
+    if (!results[0]){
+        return false
+    }
+
+    return results[1].rows.length != 0
+}
+
+export const AddResource = async (resource) => {
+
+    if (await ContainsResource(resource)){
+        return
+    }
+
+    const query = "INSERT INTO resources (name, description) VALUES ($1, $2)"
+
+    const results = await dbAPI.QueryDataBase(query, [resource.name, resource.description])
+
+    return results[0]
+}
+
+export const GetResourceID = async (resource) => {
+
+    const query = "SELECT * FROM resources WHERE name = $1"
+
+    const results = await dbAPI.QueryDataBase(query, [resource.name])
+
+    if (!results[0]){
+        return ""
+    }
+
+    if (results[1].rows.length == 0){
+        return ""
+    }
+
+    if (!results[1].rows[0].id){
+        return ""
+    }
+
+    return results[1].rows[0].id
+}
+
+export const ReserveResource = async (resource, username) => {
+
+    const userID = await GetUserID(username)
+
+    if (userID == ""){
+        return false
+    }
+
+    const resourceID = await GetResourceID(resource)
+
+    if (resourceID == ""){
+        return false
+    }
+
+    const query = "INSERT INTO reserved_resources (reserver_user_id, resource_id) VALUES ($1, $2)"
+
+    const results = await dbAPI.QueryDataBase(query, [userID, resourceID])
+
+    return results[0]
+
+}
+
+export const ResourceReserved = async (resource) => {
+
+    const resourceID = await GetResourceID(resource)
+
+    if (resourceID == ""){
+        return false
+    }
+
+    const query = "SELECT * FROM reserved_resources WHERE resource_id = $1"
+
+    const results = await dbAPI.QueryDataBase(query, [resourceID])
+
+    if (!results[0]){
+        return false
+    }
+
+    return results[1].rows.length != 0
+}
+
+export const GetReservedResources = async () => {
+
+    const query = "SELECT * FROM reserved_resources"
+
+    const results = await dbAPI.QueryDataBase(query, []) 
+
+    if (!results[0]){
+        return []
+    }
+
+    return results[1].rows
+
+}
+
+export const GetFreeResources = async () => {
+    
+    const query = "SELECT * FROM resources LEFT JOIN reserved_resources ON resources.id = reserved_resources.resource_id WHERE reserved_resources.resource_id IS NULL"
+
+    const results = await dbAPI.QueryDataBase(query, [])
+
+    if (!results[0]){
+        return []
+    }
+
+    return results.rows
+}
+
+
 

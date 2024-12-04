@@ -170,3 +170,65 @@ export const GetLoginPageHTML = () => {
         </body>
     </html>`
 }
+
+export const GetHomePageAsAdmin = (username) => {
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+            <link rel="stylesheet" href="/styles">
+        </head>
+
+        <body>
+        <h1> Welcome to the homepage! </h1>
+
+        <a href="/resource">Create resource </a> 
+    
+
+        <div class="right-align">
+            <p> Logged in as : ${username} </p>
+            <a href="/logout">Logout </a>
+        </div>
+        </body>
+    </html>
+    `
+}
+
+export const GetResourceCreationPage = () => {
+
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+            <link rel="stylesheet" href="/styles">
+        </head>
+
+        <body>
+        <h1> Create resource </h1>
+
+        <form action="/resource" method="post">
+
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="description">Description:</label><br>
+            <input type="text" id="description" name="description" required><br>
+
+            
+
+            <input  type="submit" value="Create">
+
+        </form>
+
+        <div class="right-align">
+            <p> Logged in as : ${username} </p>
+            <a href="/logout">Logout </a>
+        </div>
+        </body>
+    </html>
+    `
+} 
