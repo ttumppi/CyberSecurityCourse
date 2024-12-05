@@ -35,3 +35,5 @@ Website is available at **localhost:8000**
 |28.11.2024 | 0.1 | Added first phase 2 report| https://github.com/ttumppi/CyberSecurityCourse/blob/main/Reports/Phase2FirstReport.md |
 |28.11.2024 | 0.3 | fixed cookies | Cookie vulnerabilities mitigated |
 |28.11.2024 | 0.1 | Second phase final report | https://github.com/ttumppi/CyberSecurityCourse/blob/main/Reports/Phase2FinalReport.md |
+|04.12.2024 | 7   | Added reservation and resource functionality to the website | Functional website for making reservations and creating resources |
+|05.12.2024 | 0.5 | Created a security report of five most important security vulnerabilites | https://github.com/ttumppi/CyberSecurityCourse/blob/main/Reports/Phase3SecurityCheckReport.md |
