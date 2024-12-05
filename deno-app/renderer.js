@@ -1,6 +1,13 @@
 
 
-export const GetHomePageHTML = () => {
+export const GetHomePageHTML = (resources) => {
+
+    let items = ""
+
+    for (let resource of resources){
+        items += `<li>${resource.name}</li>`
+    }
+
     return `
     <html> 
         <head>
@@ -12,17 +19,29 @@ export const GetHomePageHTML = () => {
 
         <body>
         <h1> Welcome to the homepage! </h1>
+
         
         <div class="right-align">
             <a href="/register">Register </a>
             <a href="/login">Login </a>
         </div>
+
+        <ul>
+            ${items}
+        </ul>
         </body>
     </html>
     `
 }
 
-export const GetHomePageWithUsernameHTML = (username) => {
+export const GetHomePageWithUsernameHTML = (username, resources) => {
+
+    let items = ""
+
+    for (let resource of resources){
+        items += `<li>${resource.name}</li>`
+    }
+
     return `
     <html> 
         <head>
@@ -39,10 +58,56 @@ export const GetHomePageWithUsernameHTML = (username) => {
             <p> Logged in as : ${username} </p>
             <a href="/logout">Logout </a>
         </div>
+
+        <a> href="/reserve">Reserve </a>
+
+        <ul>
+            ${items}
+        </ul>
+
         </body>
     </html>
     `
 }
+
+export const GetHomePageAsAdminHTML = (username, resources) => {
+
+    let items = ""
+
+    for (let resource of resources){
+        items += `<li>${resource.name}</li>`
+    }
+
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+            <link rel="stylesheet" href="/styles">
+        </head>
+
+        <body>
+        <h1> Welcome to the homepage! </h1>
+
+        <a href="/resource">Create resource </a> 
+    
+
+        <div class="right-align">
+            <p> Logged in as : ${username} </p>
+            <a href="/logout">Logout </a>
+        </div>
+
+        <a> href="/reserve">Reserve </a>
+
+        <ul>
+            ${items}
+        </ul>
+        </body>
+    </html>
+    `
+}
+
 
 export const GetRegisterPageHTML = () => {
     return `
@@ -171,30 +236,7 @@ export const GetLoginPageHTML = () => {
     </html>`
 }
 
-export const GetHomePageAsAdmin = (username) => {
-    return `
-    <html> 
-        <head>
-            <title> 
-            Booking system 
-            </title>
-            <link rel="stylesheet" href="/styles">
-        </head>
 
-        <body>
-        <h1> Welcome to the homepage! </h1>
-
-        <a href="/resource">Create resource </a> 
-    
-
-        <div class="right-align">
-            <p> Logged in as : ${username} </p>
-            <a href="/logout">Logout </a>
-        </div>
-        </body>
-    </html>
-    `
-}
 
 export const GetResourceCreationPage = () => {
 

@@ -11,11 +11,11 @@ export const GetResourceCreationPage = async (request) => {
     const tokenVerificationResult = await tokenSystem.VerifyAndGetTokenFromHeaders(request.headers)
 
     if (!tokenVerificationResult.success){
-        return new Response(headers.GetDefaultHeadersWithRedirect("/"))
+        return new Response(null, headers.GetDefaultHeadersWithRedirect("/"))
     }
 
     if (!dbHandler.AdminUser(tokenVerificationResult.token.username)){
-        return new Response(headers.GetDefaultHeadersWithRedirect("/"))
+        return new Response(null, headers.GetDefaultHeadersWithRedirect("/"))
     }
 
     return new Response(renderer.GetResourceCreationPage(), headers.GetDefaultHeaders())
@@ -27,11 +27,11 @@ export const GetResourceSaveResponse = async (request) => {
     const tokenVerificationResult = await tokenSystem.VerifyAndGetTokenFromHeaders(request.headers)
 
     if (!tokenVerificationResult.success){
-        return new Response(headers.GetDefaultHeadersWithRedirect("/"))
+        return new Response(null, headers.GetDefaultHeadersWithRedirect("/"))
     }
 
     if (!dbHandler.AdminUser(tokenVerificationResult.token.username)){
-        return new Response(headers.GetDefaultHeadersWithRedirect("/"))
+        return new Response(null, headers.GetDefaultHeadersWithRedirect("/"))
     }
 
     const formData = await request.formData()
@@ -42,10 +42,10 @@ export const GetResourceSaveResponse = async (request) => {
     const resource = new Resource(name, description)
 
     if (await dbHandler.ContainsResource(resource)){
-        return new Response(headers.GetDefaultHeadersWithRedirect("/"))
+        return new Response(null, headers.GetDefaultHeadersWithRedirect("/"))
     }
 
     await dbHandler.AddResource(resource)
 
-    return new Response(headers.GetDefaultHeadersWithRedirect("/"))
+    return new Response(null, headers.GetDefaultHeadersWithRedirect("/"))
 }

@@ -382,6 +382,25 @@ export const GetReservedResources = async () => {
 
 }
 
+export const GetUserReservedResources = async(username) => {
+
+    const userID = await GetUserID(username)
+
+    if (userID == ""){
+        return []
+    }
+
+    const query = "SELECT * FROM resources JOIN reserved_resources ON resources.id = reserved_resources.resource_id WHERE reserved_resources.reserver_user_id = $1"
+
+    const results = dbAPI.QueryDataBase(query, [userID])
+
+    if (!results[0]){
+        return []
+    }
+
+    return results[1].rows
+}
+
 export const GetFreeResources = async () => {
     
     const query = "SELECT * FROM resources LEFT JOIN reserved_resources ON resources.id = reserved_resources.resource_id WHERE reserved_resources.resource_id IS NULL"
