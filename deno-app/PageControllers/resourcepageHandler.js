@@ -18,7 +18,7 @@ export const GetResourceCreationPage = async (request) => {
         return new Response(null, headers.GetDefaultHeadersWithRedirect("/"))
     }
 
-    return new Response(renderer.GetResourceCreationPage(), headers.GetDefaultHeaders())
+    return new Response(renderer.GetResourceCreationPage(tokenVerificationResult.token.username), headers.GetDefaultHeaders())
 }
 
 export const GetResourceSaveResponse = async (request) => {

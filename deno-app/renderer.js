@@ -26,6 +26,7 @@ export const GetHomePageHTML = (resources) => {
             <a href="/login">Login </a>
         </div>
 
+        <p> Reserved resources: </p>
         <ul>
             ${items}
         </ul>
@@ -59,8 +60,9 @@ export const GetHomePageWithUsernameHTML = (username, resources) => {
             <a href="/logout">Logout </a>
         </div>
 
-        <a> href="/reserve">Reserve </a>
+        <a href="/reserve">Reserve </a>
 
+        <p> Your reserved resources: </p>
         <ul>
             ${items}
         </ul>
@@ -98,8 +100,10 @@ export const GetHomePageAsAdminHTML = (username, resources) => {
             <a href="/logout">Logout </a>
         </div>
 
-        <a> href="/reserve">Reserve </a>
+        <a href="/reserve">Reserve </a>
 
+        <p> Your reserved resources: </p>
+        
         <ul>
             ${items}
         </ul>
@@ -238,7 +242,7 @@ export const GetLoginPageHTML = () => {
 
 
 
-export const GetResourceCreationPage = () => {
+export const GetResourceCreationPage = (username) => {
 
     return `
     <html> 
@@ -274,3 +278,116 @@ export const GetResourceCreationPage = () => {
     </html>
     `
 } 
+
+export const GetReservingPageHTML = (username, resources) => {
+    let items = ""
+
+    for (let resource of resources){
+        items += `
+                    <li>
+                        <p> Resource name: ${resource.name}</p>
+                        <p> Resource description: ${resource.description} </p>
+                        <form action="/reserve" method="post">
+                            <input type="hidden" name="resource" value="${resource.name}">
+                            <input type="hidden" name"description" value="${resource.description}">
+                            <button type="submit">Reserve </button>
+                        </form>
+                    </li>`
+                    
+    }
+
+
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+            <link rel="stylesheet" href="/styles">
+        </head>
+
+        <body>
+        <h1> Reservation page </h1>
+
+        
+    
+
+        <div class="right-align">
+            <p> Logged in as : ${username} </p>
+            <a href="/logout">Logout </a>
+            <a href="/"> Homepage </a>
+        </div>
+
+        
+
+        <ul>
+            ${items}
+        </ul>
+        </body>
+    </html>
+    `
+
+
+}
+
+export const GetAdminReservingPageHTML = (user, resources, usernames) => {
+
+    let users = ""
+
+    for (let username of usernames){
+        users += `<option value="${username.username}">${username.username} </option>`
+    }
+
+    let items = ""
+
+    for (let resource of resources){
+        items += `
+                    <li>
+                        <p> Resource name : ${resource.name} </p>
+                        <p> Resource description : ${resource.description} </p>
+                        <form action="/reserve" method="post">
+                            <input type="hidden" name="resource" value="${resource.name}">
+                            <input type="hidden" name"description" value="${resource.description}">
+
+                            <label for="role">Reserve for:</label><br>
+                            <select id="reserver" name="reserver">
+                                ${users}
+                            </select><br>
+
+                            <button type="submit">Reserve </button>
+                        </form>
+                    </li>`
+                    
+    }
+
+
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+            <link rel="stylesheet" href="/styles">
+        </head>
+
+        <body>
+        <h1> Reservation page </h1>
+
+        
+    
+
+        <div class="right-align">
+            <p> Logged in as : ${user} </p>
+            <a href="/logout">Logout </a>
+            <a href="/"> Homepage </a>
+        </div>
+
+        
+
+        <ul>
+            ${items}
+        </ul>
+        </body>
+    </html>
+    `
+}

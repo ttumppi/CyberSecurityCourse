@@ -22,6 +22,18 @@ export const ContainsUsername = async (username) =>{
     return new InfoBooleanResult(false, null)
 }
 
+export const GetUsernames = async () => {
+    const query = "SELECT username FROM users"
+
+    const results = await db.QueryDataBase(query, [])
+
+    if (!results[0]){
+        return []
+    }
+
+    return results[1].rows
+}
+
 export const InsertRoleOfUserToDB = async (userID, roleID) => {
     const query = "INSERT INTO roles_of_users (user_id, role_id) VALUES ($1, $2)"
 
@@ -284,7 +296,7 @@ export const ContainsResource = async (resource) => {
 
     const query = "SELECT * FROM resources WHERE name = $1"
 
-    const results = await dbAPI.QueryDataBase(query, [resource.name])
+    const results = await db.QueryDataBase(query, [resource.name])
 
     if (!results[0]){
         return false
@@ -301,7 +313,7 @@ export const AddResource = async (resource) => {
 
     const query = "INSERT INTO resources (name, description) VALUES ($1, $2)"
 
-    const results = await dbAPI.QueryDataBase(query, [resource.name, resource.description])
+    const results = await db.QueryDataBase(query, [resource.name, resource.description])
 
     return results[0]
 }
@@ -310,7 +322,7 @@ export const GetResourceID = async (resource) => {
 
     const query = "SELECT * FROM resources WHERE name = $1"
 
-    const results = await dbAPI.QueryDataBase(query, [resource.name])
+    const results = await db.QueryDataBase(query, [resource.name])
 
     if (!results[0]){
         return ""
@@ -343,7 +355,7 @@ export const ReserveResource = async (resource, username) => {
 
     const query = "INSERT INTO reserved_resources (reserver_user_id, resource_id) VALUES ($1, $2)"
 
-    const results = await dbAPI.QueryDataBase(query, [userID, resourceID])
+    const results = await db.QueryDataBase(query, [userID, resourceID])
 
     return results[0]
 
@@ -359,7 +371,7 @@ export const ResourceReserved = async (resource) => {
 
     const query = "SELECT * FROM reserved_resources WHERE resource_id = $1"
 
-    const results = await dbAPI.QueryDataBase(query, [resourceID])
+    const results = await db.QueryDataBase(query, [resourceID])
 
     if (!results[0]){
         return false
@@ -370,9 +382,9 @@ export const ResourceReserved = async (resource) => {
 
 export const GetReservedResources = async () => {
 
-    const query = "SELECT * FROM reserved_resources"
+    const query = "SELECT * FROM resources JOIN reserved_resources ON resources.id = reserved_resources.resource_id"
 
-    const results = await dbAPI.QueryDataBase(query, []) 
+    const results = await db.QueryDataBase(query, []) 
 
     if (!results[0]){
         return []
@@ -392,7 +404,7 @@ export const GetUserReservedResources = async(username) => {
 
     const query = "SELECT * FROM resources JOIN reserved_resources ON resources.id = reserved_resources.resource_id WHERE reserved_resources.reserver_user_id = $1"
 
-    const results = dbAPI.QueryDataBase(query, [userID])
+    const results = await db.QueryDataBase(query, [userID])
 
     if (!results[0]){
         return []
@@ -405,13 +417,14 @@ export const GetFreeResources = async () => {
     
     const query = "SELECT * FROM resources LEFT JOIN reserved_resources ON resources.id = reserved_resources.resource_id WHERE reserved_resources.resource_id IS NULL"
 
-    const results = await dbAPI.QueryDataBase(query, [])
+    const results = await db.QueryDataBase(query, [])
 
     if (!results[0]){
         return []
     }
 
-    return results.rows
+    
+    return results[1].rows
 }
 
 

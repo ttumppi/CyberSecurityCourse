@@ -37,12 +37,12 @@ CREATE TABLE logviewing_history(
 CREATE TABLE resources(
     id SERIAL PRIMARY KEY,
     name varchar(255) UNIQUE,
-    description varchar(255),
+    description varchar(255)
 );
 
 CREATE TABLE reserved_resources(
     reserver_user_id integer REFERENCES users(id),
-    resource_id integer REFERENCES resources(id),
+    resource_id integer REFERENCES resources(id)
 );
 
 INSERT INTO defined_roles (role_name)

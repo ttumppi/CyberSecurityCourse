@@ -16,8 +16,8 @@ export const GetHomePage = async (request) => {
 
     const userReservedResources = await dbHandler.GetUserReservedResources(tokenVerificationResult.token.username)
 
-    if (!dbHandler.AdminUser(tokenVerificationResult.token.username)){
-        return new Response(renderer.GetHomePageAsAdmin(tokenVerificationResult.token.username, userReservedResources), headers.GetDefaultHeaders())
+    if (await dbHandler.AdminUser(tokenVerificationResult.token.username)){
+        return new Response(renderer.GetHomePageAsAdminHTML(tokenVerificationResult.token.username, userReservedResources), headers.GetDefaultHeaders())
     }
    
     return new Response(renderer.GetHomePageWithUsernameHTML(tokenVerificationResult.token.username, userReservedResources), headers.GetDefaultHeaders())

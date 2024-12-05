@@ -5,6 +5,8 @@ import * as registerpageHandler from "./PageControllers/registerpageHandler.js"
 import * as loginpageHandler from "./PageControllers/loginpageHandler.js"
 import * as pagelessHandler from "./PageControllers/pagelessHandler.js"
 import * as styleHandler from "./Styling/styleHandler.js"
+import * as reservepageHandler from "./PageControllers/reservepageHandler.js"
+import * as resourcepageHandler from "./PageControllers/resourcepageHandler.js"
 
 
 const ParsePathFromURL = (url) => {
@@ -45,6 +47,12 @@ export const GetResponseToGet = async (request, connectionInfo) => {
         case "/styles":
             return await styleHandler.GetStyleResponse(request)
 
+        case "/reserve":
+            return await reservepageHandler.GetReservePageResponse(request)
+
+        case "/resource":
+            return await resourcepageHandler.GetResourceCreationPage(request)
+
         default:
             return new Response("Unknown url")
         
@@ -63,6 +71,12 @@ export const GetResponseToPost = async (request, connectionInfo) => {
 
         case "/login":
             return await loginpageHandler.GetLoginResponse(request, connectionInfo)
+
+        case "/reserve":
+            return await reservepageHandler.GetResourceReservingResponse(request)
+
+        case "/resource":
+            return await resourcepageHandler.GetResourceSaveResponse(request)
 
         default:
             return new Response("Unknown url")
