@@ -35,6 +35,41 @@ export const GetHomePageHTML = (resources) => {
     `
 }
 
+export const GetHomePageWithUnderageUsernameHTML = (username, resources) => {
+    let items = ""
+
+    for (let resource of resources){
+        items += `<li>${resource.name}</li>`
+    }
+
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+            <link rel="stylesheet" href="/styles">
+        </head>
+
+        <body>
+        <h1> Welcome to the homepage! </h1>
+
+        <div class="right-align">
+            <p> Logged in as : ${username} </p>
+            <a href="/logout">Logout </a>
+        </div>
+
+        
+        <p> Your reserved resources: </p>
+        <ul>
+            ${items}
+        </ul>
+
+        </body>
+    </html>
+    `
+}
+
 export const GetHomePageWithUsernameHTML = (username, resources) => {
 
     let items = ""
@@ -103,7 +138,7 @@ export const GetHomePageAsAdminHTML = (username, resources) => {
         <a href="/reserve">Reserve </a>
 
         <p> Your reserved resources: </p>
-        
+
         <ul>
             ${items}
         </ul>

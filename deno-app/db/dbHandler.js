@@ -427,5 +427,42 @@ export const GetFreeResources = async () => {
     return results[1].rows
 }
 
+export const CheckUserAge = async (username, minimumAge) => {
+
+    const userID = await GetUserID(username)
+
+    if (userID == ""){
+        return false
+    }
+
+    const query = "SELECT birth_date from users WHERE id = $1"
+
+    const results = await db.QueryDataBase(query, [userID])
+
+    if (!results[0]){
+        return false
+    }
+
+    if (results[1].rows.length == 0){
+        return false
+    }
+
+
+    const birthDate = results[1].rows[0].birth_date
+
+    const currentDate = new Date()
+
+    let ageDifference = currentDate.getFullYear() - birthDate.getFullYear()
+
+    if (
+        currentDate.getMonth() < birthDate.getMonth() || 
+        (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())
+    ) {
+        ageDifference--;
+    }
+
+    return ageDifference > minimumAge
+}
+
 
 

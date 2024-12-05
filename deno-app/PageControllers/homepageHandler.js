@@ -10,8 +10,13 @@ export const GetHomePage = async (request) => {
     
 
     const tokenVerificationResult = await tokenSystem.VerifyAndGetTokenFromHeaders(request.headers)
+
     if (!tokenVerificationResult.success){
         return new Response(renderer.GetHomePageHTML(reservedResources), headers.GetDefaultHeaders())
+    }
+
+    if (!(await dbHandler.CheckUserAge(tokenVerificationResult.token.username, 15))){
+        return new Response(renderer.GetHomePageWithUnderageUsernameHTML(tokenVerificationResult.token.username, []), headers.GetDefaultHeaders())
     }
 
     const userReservedResources = await dbHandler.GetUserReservedResources(tokenVerificationResult.token.username)
