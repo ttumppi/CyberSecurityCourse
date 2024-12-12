@@ -464,5 +464,25 @@ export const CheckUserAge = async (username, minimumAge) => {
     return ageDifference > minimumAge
 }
 
+export const GetUserBirthDate = async (userID) => {
+
+   
+    const query = "SELECT birth_date FROM users WHERE id = $1"
+
+    const results = await db.QueryDataBase(query, [userID])
+
+    if (!results[0]){
+        return ""
+    }
+
+    if (results[1].rows.length == 0){
+        return ""
+    }
+
+    return results[1].rows[0].birth_date
+}
+
+
+
 
 

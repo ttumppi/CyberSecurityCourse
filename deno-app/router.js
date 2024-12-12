@@ -7,6 +7,9 @@ import * as pagelessHandler from "./PageControllers/pagelessHandler.js"
 import * as styleHandler from "./Styling/styleHandler.js"
 import * as reservepageHandler from "./PageControllers/reservepageHandler.js"
 import * as resourcepageHandler from "./PageControllers/resourcepageHandler.js"
+import * as permissionspageHandler from "./PageControllers/permissionspageHandler.js"
+import * as scriptHandler from "./ClientScripting/scriptHandler.js"
+import * as accountpageHandler from "./PageControllers/accountpageHandler.js"
 
 
 const ParsePathFromURL = (url) => {
@@ -36,7 +39,7 @@ export const GetResponseToGet = async (request, connectionInfo) => {
             return await homepageHandler.GetHomePage(request)
             
         case "/register":
-           return registerpageHandler.GetRegisterPage()
+           return registerpageHandler.GetRegisterPage(request)
 
         case "/login":
             return loginpageHandler.GetLoginPage()
@@ -52,6 +55,18 @@ export const GetResponseToGet = async (request, connectionInfo) => {
 
         case "/resource":
             return await resourcepageHandler.GetResourceCreationPage(request)
+
+        case "/policy":
+            return await permissionspageHandler.GetPrivacyPolicyPageResponse(request)
+
+        case "/tos":
+            return await permissionspageHandler.GetTermsOfServicePageResponse(request)
+
+        case "/clientScripts":
+            return await scriptHandler.GetScriptResponse(request)
+
+        case "/account":
+            return await accountpageHandler.GetAccountPageResponse(request)
 
         default:
             return new Response("Unknown url")
@@ -78,6 +93,7 @@ export const GetResponseToPost = async (request, connectionInfo) => {
         case "/resource":
             return await resourcepageHandler.GetResourceSaveResponse(request)
 
+        
         default:
             return new Response("Unknown url")
     }

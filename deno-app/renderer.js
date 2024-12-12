@@ -24,7 +24,9 @@ export const GetHomePageHTML = (resources) => {
         <div class="right-align">
             <a href="/register">Register </a>
             <a href="/login">Login </a>
+            <a href="/policy">Privacy policy </a>
         </div>
+        
 
         <p> Reserved resources: </p>
         <ul>
@@ -57,8 +59,10 @@ export const GetHomePageWithUnderageUsernameHTML = (username, resources) => {
         <div class="right-align">
             <p> Logged in as : ${username} </p>
             <a href="/logout">Logout </a>
+            <a href="/policy">Privacy policy </a>
+            <a href="/account">My account </a>
         </div>
-
+        
         
         <p> Your reserved resources: </p>
         <ul>
@@ -93,7 +97,10 @@ export const GetHomePageWithUsernameHTML = (username, resources) => {
         <div class="right-align">
             <p> Logged in as : ${username} </p>
             <a href="/logout">Logout </a>
+            <a href="/policy">Privacy policy </a>
+            <a href="/account">My account </a>
         </div>
+        
 
         <a href="/reserve">Reserve </a>
 
@@ -133,6 +140,8 @@ export const GetHomePageAsAdminHTML = (username, resources) => {
         <div class="right-align">
             <p> Logged in as : ${username} </p>
             <a href="/logout">Logout </a>
+            <a href="/policy">Privacy policy </a>
+            <a href="/account">My account </a>
         </div>
 
         <a href="/reserve">Reserve </a>
@@ -159,6 +168,9 @@ export const GetRegisterPageHTML = () => {
         </head>
 
         <body>
+
+        <script src="/clientScripts"></script>
+
         <div class="right-align">
             <a href="/">Homepage </a>
         </div>
@@ -258,6 +270,7 @@ export const GetLoginPageHTML = () => {
 
         <div class="right-align">
             <a href="/">Homepage </a>
+            <a href="/policy">Privacy policy </a>
         </div>
 
         <h1> Login page! </h1>
@@ -422,6 +435,114 @@ export const GetAdminReservingPageHTML = (user, resources, usernames) => {
         <ul>
             ${items}
         </ul>
+        </body>
+    </html>
+    `
+}
+
+export const GetPrivacyPolicyHTML = () => {
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+            <link rel="stylesheet" href="/styles">
+        </head>
+
+        <body>
+        <h1> Privacy policy: </h1>
+
+        
+    
+
+        <div class="right-align">
+            
+            <a href="/"> Homepage </a>
+        </div>
+
+        
+
+       
+        </body>
+    </html>
+    `
+}
+
+export const GetTermsOfServiceHTML = () => {
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+            <link rel="stylesheet" href="/styles">
+        </head>
+
+        <body>
+
+         <script src="/clientScripts"></script>
+
+        <h1> Terms of service: </h1>
+
+        <h1> Please accept the terms of service: </h1>
+        <h2> some services </h2>
+    
+        
+        <input type="checkbox" id="tos" name="tos" value="I understand">
+        
+
+        
+
+        <div class="right-align">
+            
+            <a href="/"> Homepage </a>
+            <a href="/policy"> Privacy policy </a>
+        </div>
+
+        
+
+       
+        </body>
+    </html>
+    `
+}
+
+export const GetAccountPage = (username, userData) => {
+    return `
+    <html> 
+        <head>
+            <title> 
+            Booking system 
+            </title>
+            <link rel="stylesheet" href="/styles">
+        </head>
+
+        <body>
+
+         <script src="/clientScripts"></script>
+
+        <h1> Terms of service: </h1>
+
+        <h2> Username : ${username} </h2>
+        <h2> Birth Date : ${userData.birthDate}</h2>
+        <h2> Role : ${userData.role}</h2>
+    
+        
+       
+        
+
+        
+
+        <div class="right-align">
+            
+            <a href="/"> Homepage </a>
+            
+        </div>
+
+        
+
+       
         </body>
     </html>
     `

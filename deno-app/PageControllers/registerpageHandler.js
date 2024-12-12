@@ -5,7 +5,9 @@ import * as headers from "../headers.js"
 
 
 
-export const GetRegisterPage = () => {
+export const GetRegisterPage = (request) => {
+
+   
     return new Response(renderer.GetRegisterPageHTML(), headers.GetDefaultHeaders())
 }
 
