@@ -569,7 +569,7 @@ export const GetAccountPage = (username, userData) => {
 
          <script src="/clientScripts"></script>
 
-        <h1> Terms of service: </h1>
+        
 
         <h2> Username : ${username} </h2>
         <h2> Birth Date : ${userData.birthDate}</h2>
