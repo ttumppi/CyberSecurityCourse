@@ -25,6 +25,7 @@ export const GetHomePageHTML = (resources) => {
             <a href="/register">Register </a>
             <a href="/login">Login </a>
             <a href="/policy">Privacy policy </a>
+            <a href="/tos"> Terms of Service </a>
         </div>
         
 
@@ -60,6 +61,7 @@ export const GetHomePageWithUnderageUsernameHTML = (username, resources) => {
             <p> Logged in as : ${username} </p>
             <a href="/logout">Logout </a>
             <a href="/policy">Privacy policy </a>
+            <a href="/tos"> Terms of Service </a>
             <a href="/account">My account </a>
         </div>
         
@@ -98,6 +100,7 @@ export const GetHomePageWithUsernameHTML = (username, resources) => {
             <p> Logged in as : ${username} </p>
             <a href="/logout">Logout </a>
             <a href="/policy">Privacy policy </a>
+            <a href="/tos"> Terms of Service </a>
             <a href="/account">My account </a>
         </div>
         
@@ -141,6 +144,7 @@ export const GetHomePageAsAdminHTML = (username, resources) => {
             <p> Logged in as : ${username} </p>
             <a href="/logout">Logout </a>
             <a href="/policy">Privacy policy </a>
+            <a href="/tos"> Terms of Service </a>
             <a href="/account">My account </a>
         </div>
 
@@ -173,6 +177,7 @@ export const GetRegisterPageHTML = () => {
 
         <div class="right-align">
             <a href="/">Homepage </a>
+            <a href="/tos"> Terms of Service </a>
         </div>
         <h1> Register page! </h1>
 
@@ -460,6 +465,7 @@ export const GetPrivacyPolicyHTML = () => {
         <div class="right-align">
             
             <a href="/"> Homepage </a>
+            <a href="/tos"> Terms of Service </a>
         </div>
 
         
@@ -483,6 +489,13 @@ export const GetTermsOfServiceHTML = () => {
         <body>
 
          <script src="/clientScripts"></script>
+
+
+         <div class="right-align">
+            
+            <a href="/"> Homepage </a>
+            <a href="/policy"> Privacy policy </a>
+        </div>
 
         <h1> Terms of service: </h1>
 
@@ -526,16 +539,13 @@ export const GetTermsOfServiceHTML = () => {
             <li> offending us or any third party.</li>
         </ul>
 
-        <input type="checkbox" id="tos" name="tos" value="I understand">
+        <label>I understand</label>
+        <input type="checkbox" id="tos" name="tos">
         
 
         
 
-        <div class="right-align">
-            
-            <a href="/"> Homepage </a>
-            <a href="/policy"> Privacy policy </a>
-        </div>
+        
 
         
 
