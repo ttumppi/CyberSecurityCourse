@@ -452,8 +452,9 @@ export const GetPrivacyPolicyHTML = () => {
 
         <body>
         <h1> Privacy policy: </h1>
-
-        
+        <h2> This website collects and stores the entered username and birthdate and password to a database upon registration.<br />
+            Each succesfull login is logged and in the log stores the username and ip address from the client. <br /> 
+            These parts of user data are not distributed and are only for internal monitoring of the application. </h2>
     
 
         <div class="right-align">
@@ -485,10 +486,46 @@ export const GetTermsOfServiceHTML = () => {
 
         <h1> Terms of service: </h1>
 
-        <h1> Please accept the terms of service: </h1>
-        <h2> some services </h2>
-    
-        
+        <h1> Please accept the terms of service to be able to register: </h1>
+        <h2> Terms of Service of CyberSecurityCourse project </h2>
+
+        <p>This document governs</p>
+        <ul>
+            <li>the use of our website, and,</li>
+            <li>any other related agreement or legal relationship with us</li>
+        </ul>
+        <p>in a legally binding way.</p>
+        <p>You must read this document carefully.</p>
+
+        <h2>TERMS OF USE</h2>
+        <p>Unless stated otherwise, the terms in this section apply generally when using our website.</p>
+        <p>Specific or additional conditions may apply in certain situations and are noted in this document.</p>
+        <p> When registering, you are responsible for creating strong passwords. </p>
+        <p> By registering, you agree to take full responsibility for all activities under your username and password. </p>
+        <p>Registration of accounts on our website is subject to the conditions outlined below. By registering, you agree to meet such conditions.</p>
+        <ul>
+            <li> It is not permitted to register accounts by bots or any other automated methods;</li>
+            <li> You must register only one account, unless otherwise specified;</li>
+            <li> Your account must not be shared with other persons unless otherwise specified.</li>
+        </ul>
+
+        <p> We do our best to ensure the content on our website complies with all laws and respects third-party rights. However, this may not always be achievable.</p>
+
+        <h4 >Rights regarding content on our website - All rights reserved</h4>
+        <p> We hold and reserve all intellectual property rights for all content.</p>
+        <p> You may not use such content in any way that is not necessary or implied for the proper use of the service.</p>
+        <p> Specifically, but without limitation, you may not copy, download, share (beyond the limits mentioned below), modify, translate, transform, publish, transmit, sell, sublicense, edit, transfer, assign to third parties, or create derivative works from the content on our website. You also cannot allow any third party to do so through your account or device, even unknowingly.</p>
+        <p> Where explicitly stated, you may download, copy, and share some content from our website for personal and non-commercial use, provided you correctly implement copyright and other required attributions.</p>
+        <p> Any statutory limitations or exceptions to copyright remain unaffected.</p>
+
+        <p> We reserve the right to protect our interests by denying you access to our website or service, terminating contracts, and reporting any misconduct to the appropriate authorities if you are involved in or suspected of the following:</p>
+        <ul>
+            <li> violating laws, regulations, or these terms;</li>
+            <li> infringing on third-party rights;</li>
+            <li> significantly impairing our legitimate interests;</li>
+            <li> offending us or any third party.</li>
+        </ul>
+
         <input type="checkbox" id="tos" name="tos" value="I understand">
         
 
